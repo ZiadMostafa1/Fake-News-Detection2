@@ -9,6 +9,7 @@ import pickle
 import re
 from sklearn.base import BaseEstimator, TransformerMixin
 from nltk.corpus import stopwords
+import nltk
 nltk.download('stopwords')
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.tokenize import word_tokenize
