@@ -20,6 +20,7 @@ from wordcloud import WordCloud
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from collections import Counter
+nltk.download('punkt')
 
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
@@ -75,11 +76,10 @@ data = pd.read_csv('prepared_data.csv')
 
 
 # MAKE THE APP
-# Add a radio botton to the sidebar for page selection
+# Add a radio botton to the sidebar for page selecti
 
 st.sidebar.title('Navigation')
-page = st.sidebar.radio('Go to', ['Home', 'Visualizations', 'Prediction', 'Processing Steps'])
-
+page = st.sidebar.radio('Go to', ['Visualizations', 'Processing Steps', 'Prediction' ])
 
 if page == "Prediction":
     # User input
@@ -155,11 +155,3 @@ elif page == "Visualizations":
     x, y = zip(*most_common)
     fig = go.Figure(data=[go.Bar(x=x, y=y)])
     st.plotly_chart(fig, use_container_width=True)
-
-    # Word Cloud
-    st.write("4. **Word Cloud**")
-    wordcloud = WordCloud(width=2000, height=1000,  # Increase width and height
-                stopwords = None, 
-                min_font_size = 10).generate(text)
-    wordcloud_image = go.Figure(data=[go.Image(z=wordcloud.to_array())])
-    st.plotly_chart(wordcloud_image, use_container_width=True)
