@@ -1,16 +1,5 @@
 # make a streamlit app to show visualizations of the data and take user input to predict if a news article is fake or real
 
-import os
-import nltk
-
-nltk_packages = ['omw-1.4', 'stopwords', 'punkt', 'wordnet']
-
-# Pre-download data on server (replace '/path/to/nltk_data' with your desired path)
-nltk.data.path.append('/path/to/nltk_data')
-for package in nltk_packages:
-  if not nltk.data.path.exists(package):
-    nltk.download(package)
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,8 +9,19 @@ import pickle
 import re
 from sklearn.base import BaseEstimator, TransformerMixin
 from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.tokenize import word_tokenize
+import nltk
+
+nltk_packages = ['omw-1.4', 'stopwords', 'punkt', 'wordnet']
+
+for package in nltk_packages:
+    try:
+        nltk.data.find(package)
+    except LookupError:
+        nltk.download(package)
 
 import re
 import string
@@ -160,4 +160,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()  
+    main()
