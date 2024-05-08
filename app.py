@@ -14,24 +14,26 @@ nltk.download('stopwords')
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 from nltk.tokenize import word_tokenize
 import nltk
+
+nltk_packages = ['omw-1.4', 'stopwords', 'punkt', 'wordnet']
+
+for package in nltk_packages:
+    try:
+        nltk.data.find(package)
+    except LookupError:
+        nltk.download(package)
+
 import re
 import string
 from wordcloud import WordCloud
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from collections import Counter
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-
 
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 
-stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
-port_stem = nltk.PorterStemmer()
 
 class Preprocessing(BaseEstimator, TransformerMixin):
     def __init__(self):
